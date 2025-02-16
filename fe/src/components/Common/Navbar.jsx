@@ -5,6 +5,7 @@ import {
   HiOutlineShoppingBag,
   HiBars3BottomRight,
 } from "react-icons/hi2";
+import Searchbar from "./Searchbar";
 const Navbar = () => {
   return (
     <>
@@ -52,6 +53,7 @@ const Navbar = () => {
             <span className="absolute bg-kang-red -top-1  text-white text-xs rounded-full px-2 py-0.5">4</span>
           </button>
           {/* Search */}
+          <Searchbar/>
           <button className="md:hidden">
             <HiBars3BottomRight className="h-6 w-6 text-gray-700"/>
           </button>
