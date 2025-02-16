@@ -4,7 +4,7 @@ import { IoLogoInstagram } from "react-icons/io";
 import { RiTwitterLine } from "react-icons/ri";
 const TopBar = () => {
   return (
-    <div className="bg-redd text-white">
+    <div className="bg-kang-red text-white">
       <div className="container mx-auto flex  justify-between items-center py-3 px-4">
         <div className="hidden md:flex items-center space-x-4">
           <a href="#" className="hover:text-gray-300 ">
@@ -18,11 +18,11 @@ const TopBar = () => {
           </a>
         </div>
         <div className="text-sm text-center flex-grow">
-          <span>We ship worldwide - Fast and reliable shipping! </span>
+          <span>Chúng tôi vận chuyển trên toàn thế giới - vận chuyển nhanh chóng và đáng tin cậy! </span>
         </div>
         <div className="text-sm hidden md:block">
           <a href="tel:+01234567890" className="hover:text-gray-300">
-            +1 (234) 567-890
+            +(84) 332 65 3962
           </a>
         </div>
       </div>
