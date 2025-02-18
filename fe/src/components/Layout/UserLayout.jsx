@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
+import { Outlet } from "react-router-dom";
 
 const UserLayout = () => {
   return (
@@ -9,10 +10,7 @@ const UserLayout = () => {
       <Header />
       {/* Main content */}
       <main>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-        corrupti sapiente necessitatibus vel consequatur magnam, reiciendis,
-        error hic, odio eligendi culpa? Doloremque debitis, nam quia natus
-        quaerat quo ab cupiditate.
+        <Outlet/>
       </main>
       {/* Footer */}
       <Footer />
