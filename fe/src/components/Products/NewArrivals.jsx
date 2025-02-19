@@ -178,7 +178,7 @@ const NewArrivals = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUporLeave}
         onMouseLeave={handleMouseUporLeave}
-        className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${
+        className={`container mx-auto overflow-x-scroll scrollbar-none flex space-x-6 relative ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
       >
