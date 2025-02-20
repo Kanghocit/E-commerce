@@ -27,7 +27,7 @@ const similarProducts = [
     name: "Product 1",
     price: 100,
     images: [
-      { url: "https://picsum.photos/500/500?random=3", altText: "Product 1" },
+      { url: "https://picsum.photos/500/500?random=1", altText: "Product 1" },
     ],
   },
   {
@@ -35,7 +35,7 @@ const similarProducts = [
     name: "Product 2",
     price: 200,
     images: [
-      { url: "https://picsum.photos/500/500?random=3", altText: "Product 2" },
+      { url: "https://picsum.photos/500/500?random=2", altText: "Product 2" },
     ],
   },
   {
@@ -54,6 +54,7 @@ const similarProducts = [
       { url: "https://picsum.photos/500/500?random=4", altText: "Product 4" },
     ],
   },
+  
 ];
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
