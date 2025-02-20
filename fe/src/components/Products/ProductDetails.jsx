@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import { toast } from "sonner";
+import ProductGrid from "./ProductGrid";
 const selectProduct = {
   name: "Stylish Jacket",
   price: 120,
@@ -20,8 +21,70 @@ const selectProduct = {
     },
   ],
 };
+const similarProducts = [
+  {
+    _id: 1,
+    name: "Product 1",
+    price: 100,
+    images: [
+      { url: "https://picsum.photos/500/500?random=3", altText: "Product 1" },
+    ],
+  },
+  {
+    _id: 2,
+    name: "Product 2",
+    price: 200,
+    images: [
+      { url: "https://picsum.photos/500/500?random=3", altText: "Product 2" },
+    ],
+  },
+  {
+    _id: 3,
+    name: "Product 3",
+    price: 300,
+    images: [
+      { url: "https://picsum.photos/500/500?random=3", altText: "Product 3" },
+    ],
+  },
+  {
+    _id: 4,
+    name: "Product 4",
+    price: 400,
+    images: [
+      { url: "https://picsum.photos/500/500?random=4", altText: "Product 4" },
+    ],
+  },
+];
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isButtonDisable, setIsButtonDisable] = useState(false);
+  const handleQuantityChange = (action) => {
+    if (action === "plus") setQuantity((prev) => prev + 1);
+    if ((action === "minus") & (quantity > 1)) setQuantity((prev) => prev - 1);
+  };
+  const handleAddToCart = () => {
+    if (!selectedColor || !selectedSize) {
+      toast.error(
+        !selectedColor && !selectedSize
+          ? "Please select a size and color before adding to cart."
+          : !selectedSize
+          ? "Please select a size before adding to cart."
+          : "Please select a color before adding to cart.",
+        { duration: 1000 }
+      );
+      return;
+    }
+    setIsButtonDisable(true);
+    setTimeout(() => {
+      toast.success("Product added to cart!", {
+        duration: 1000,
+      });
+      setIsButtonDisable(false);
+    }, 500);
+  };
   useEffect(() => {
     if (selectProduct?.images?.length > 0) {
       setMainImage(selectProduct.images[0].url);
@@ -88,7 +151,12 @@ const ProductDetails = () => {
                 {selectProduct.colors.map((color) => (
                   <button
                     key={color}
-                    className="h-8 w-8 rounded-full border"
+                    onClick={() => setSelectedColor(color)}
+                    className={`h-8 w-8 rounded-full border ${
+                      selectedColor === color
+                        ? "border-black border-4"
+                        : "border-gray-300"
+                    }`}
                     style={{
                       backgroundColor: color.toLocaleLowerCase(),
                       filter: "brightness(0.5)",
@@ -101,7 +169,13 @@ const ProductDetails = () => {
               <p className="text-gray-700">Size: </p>
               <div className="flex gap-2 mt-2">
                 {selectProduct.sizes.map((size) => (
-                  <button key={size} className="px-4 rounded border">
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`px-4 rounded border ${
+                      selectedSize === size ? "bg-black text-white" : ""
+                    }`}
+                  >
                     {size}
                   </button>
                 ))}
@@ -110,17 +184,31 @@ const ProductDetails = () => {
             <div className="mb-6">
               <p className="text-gray-700">Quantity:</p>
               <div className="flex items-center space-x-4 mt-2">
-                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                <button
+                  className="px-2 py-1 bg-gray-200 rounded text-lg"
+                  onClick={() => handleQuantityChange("minus")}
+                >
                   -
                 </button>
-                <span className="text-lg">1</span>
-                <button className="px-2 py-1 bg-gray-200 rounded text-lg">
+                <span className="text-lg">{quantity}</span>
+                <button
+                  className="px-2 py-1 bg-gray-200 rounded text-lg"
+                  onClick={() => handleQuantityChange("plus")}
+                >
                   +
                 </button>
               </div>
             </div>
-            <button className="bg-black text-white py-2 px-6 rounded w-full mb-4">
-              ADD TO CART
+            <button
+              disabled={isButtonDisable}
+              className={`bg-black text-white py-2 px-6 rounded w-full mb-4 ${
+                isButtonDisable
+                  ? "cursor-not-allowed opacity-50"
+                  : "hover:bg-gray-900"
+              }`}
+              onClick={handleAddToCart}
+            >
+              {isButtonDisable ? "ADDING...." : "ADD TO CART"}
             </button>
             <div className="mt-10 text-gray-700">
               <h3 className="text-xl font-bold mb-4">Characteristic:</h3>
@@ -138,6 +226,13 @@ const ProductDetails = () => {
               </table>
             </div>
           </div>
+        </div>
+
+        <div className="mt-20">
+          <h2 className="text-2xl text-center font-medium mb-4">
+            YOU MAY ALSO LIKE
+          </h2>
+          <ProductGrid products={similarProducts} />
         </div>
       </div>
     </div>
