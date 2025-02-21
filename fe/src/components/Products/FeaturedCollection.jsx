@@ -30,7 +30,7 @@ const FeaturedCollection = () => {
           <img
             src={featured}
             alt="Featured Collection"
-            className="w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl "
+            className="w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl"
           />
         </div>
       </div>
